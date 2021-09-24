@@ -1,0 +1,68 @@
+.search-form {
+  display: flex;
+  grid-area: search-form;
+  width: 280px;
+  margin: 2rem auto;
+}
+.form {
+  width: 100%;
+  border-radius: 8px;
+  margin: 0.5rem;
+}
+.form-container {
+  padding: 1rem;
+  border-radius: 8px;
+  background: #7831a3;
+  box-shadow: 5px 5px 8px rgba(70, 70, 70, 0.15);
+}
+.options-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1rem 0;
+}
+.label {
+  font-family: "Denk One", sans-serif;
+  display: block;
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+.label-input {
+  display: inline-block;
+  font-size: 15px;
+}
+.buttons a {
+  text-decoration: none;
+}
+.button-inp {
+  padding: 0.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  font-family: "Denk One", sans-serif;
+  color: #7831a3;
+  margin-bottom: 5px;
+  text-align: center;
+}
+.button-inp:hover {
+  cursor: pointer;
+  background-color: #d2b8e2;
+}
+.multiSelectContainer {
+  background: #fff;
+  border-radius: 8px;
+}
+.chip {
+  background: #7831a3;
+}
+.highlightOption {
+  background: #7831a3;
+}
+.multiSelectContainer li:hover {
+  background: #7831a3;
+}
+@media only screen and (max-width: 900px) {
+  .search-form {
+    width: 400px;
+  }
+}

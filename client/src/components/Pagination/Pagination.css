@@ -1,0 +1,19 @@
+.ul-list {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ul-list li {
+  margin: 0 5px;
+}
+
+.ul-list li button {
+  background: #7831a3;
+  border-radius: 8px;
+  color: #fff;
+  height: 30px;
+  width: 30px;
+  line-height: 25px;
+  text-align: center;
+}

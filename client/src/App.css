@@ -1,0 +1,22 @@
+#container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 8fr 1fr;
+  grid-template-areas:
+    "navbar"
+    "main"
+    "footer";
+}
+
+.navbar {
+  grid-area: navbar;
+  box-shadow: 5px 5px 8px rgba(70, 70, 70, 0.15);
+}
+.main {
+  grid-area: main;
+  background: #efeff1;
+}
+.footer {
+  grid-area: footer;
+}

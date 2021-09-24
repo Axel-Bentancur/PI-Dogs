@@ -1,0 +1,23 @@
+.asd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+}
+.create-form {
+  width: 300px;
+}
+.create-options-container {
+  display: flex;
+}
+.create-options {
+  color: #fff;
+  margin-right: 5px;
+}
+.create-options-container input {
+  width: 40px;
+  margin-right: 10px;
+}
+input {
+  border-radius: 5px;
+}

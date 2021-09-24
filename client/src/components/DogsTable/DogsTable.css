@@ -1,0 +1,17 @@
+.main-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "search-form dog-table dog-table dog-table";
+}
+
+@media only screen and (max-width: 900px) {
+  .main-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "dog-table"
+      "search-form";
+  }
+}

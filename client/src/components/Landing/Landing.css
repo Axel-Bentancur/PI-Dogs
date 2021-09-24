@@ -1,0 +1,78 @@
+.landing-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+.landing-dog-img {
+  position: absolute;
+  bottom: -27px;
+  right: 0;
+  transform: rotate(4deg);
+  background: #cdb1df;
+  z-index: -1;
+  border-radius: 50%;
+}
+.landing-dog-img img {
+  width: 100%;
+}
+.landing-dog-text {
+  background: #7831a3;
+  padding: 2rem;
+  border-radius: 10px;
+  margin: 1rem;
+}
+.button-landing {
+  text-align: center;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+.button-landing span {
+  font-size: 18px;
+  font-weight: 700;
+}
+.landing-dog-text a {
+  text-decoration: none;
+}
+.landing-dog-text a:active {
+  color: #7831a3;
+}
+.intro-text {
+  color: #fff;
+}
+.title-page {
+  display: block;
+  font-weight: 700;
+  font-size: 40px;
+  margin-bottom: 1.5rem;
+}
+.circle {
+  background: #a1a1a1;
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+}
+.about {
+  width: 25px;
+  transition: width 2s;
+}
+.title-page:hover > .about {
+  width: 125px;
+}
+.dogs {
+  background: #7831a3;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+.block {
+  display: inline-block;
+}
+
+@media only screen and (max-width: 900px) {
+  .landing-container {
+    align-items: baseline;
+  }
+}

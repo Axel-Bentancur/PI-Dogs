@@ -1,0 +1,22 @@
+.logo {
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  justify-content: space-between;
+  margin: 0.3rem 1.5rem;
+}
+.logo a {
+  text-decoration: none;
+}
+.button {
+  padding: 0.5rem;
+  background-color: #7831a3;
+  border-radius: 8px;
+  font-family: "Denk One", sans-serif;
+  color: #fff;
+  margin-bottom: 5px;
+}
+.button:hover {
+  cursor: pointer;
+  background-color: #602883;
+}
