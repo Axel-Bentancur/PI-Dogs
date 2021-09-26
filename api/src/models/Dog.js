@@ -25,9 +25,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      temperament: {
-        type: DataTypes.STRING,
-      },
       reference_image_id: {
         type: DataTypes.STRING,
       },

@@ -7,6 +7,7 @@ import DogsTable from "./components/DogsTable/DogsTable";
 import DogInfo from "./components/DogInfo/DogInfo";
 import CreateDog from "./components/CreateDog/CreateDog";
 import Landing from "./components/Landing/Landing";
+
 /* STYLES */
 import "./App.css";
 

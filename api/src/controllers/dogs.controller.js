@@ -4,10 +4,6 @@ const {
   getCustomBreeds,
   getBreedNameFull,
   newDog,
-  getBreedsApi,
-  getTemperamentList,
-  createArrOfObj,
-  bulkAllTemperament,
   getTemp,
 } = require("../helpers/Helpers");
 
@@ -26,16 +22,8 @@ dogsCtrl.getBreedName = async (req, res) => {
 };
 
 dogsCtrl.createBreed = async (req, res) => {
-  const newData = await newDog(req.body);
+  await newDog(req.body);
   res.status(201);
-};
-
-dogsCtrl.bulkTemperament = async (_req, res) => {
-  const list = await getBreedsApi();
-  const Data = await getTemperamentList(list);
-  const final = await createArrOfObj(Data);
-  const bulk = await bulkAllTemperament(final);
-  res.status(201).json(bulk);
 };
 
 dogsCtrl.getTemperamentList = async (_req, res) => {

@@ -42,8 +42,14 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Dog, Height, Weight, Image, Temperamento } = sequelize.models;
 
 // Aca vendrian las relaciones
-Dog.hasOne(Temperamento);
-Temperamento.belongsTo(Dog);
+Dog.belongsToMany(Temperamento, {
+  through: "dog_temperamento",
+  timestamps: false,
+});
+Temperamento.belongsToMany(Dog, {
+  through: "dog_temperamento",
+  timestamps: false,
+});
 
 Dog.hasOne(Weight);
 Weight.belongsTo(Dog);

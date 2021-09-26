@@ -43,9 +43,10 @@
   font-weight: 700;
 }
 .dog-breed-info {
-  color: #333333;
+  font-family: "Podkova", serif;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 15px;
+  color: #404040;
 }
 .dog-img {
   max-width: 100%;

@@ -11,10 +11,20 @@ import "./DogInfo.css";
 export default function DogInfo({ match }) {
   const breed = useSelector((state) => state.dogReducer.breed);
   const dispatch = useDispatch();
+  const dbTemp = breed.temperamentos;
 
   useEffect(() => {
     dispatch(getBreed(match.params.BreedId));
   }, [dispatch, match.params.BreedId]);
+
+  const stringTemp = () => {
+    let str = "";
+    breed.temperamentos.map(function (item) {
+      return (str += ` ${item.type},`);
+    });
+    let tempString = str.slice(0, -1);
+    return <span className="dog-breed-info">{tempString}</span>;
+  };
 
   if (breed?.weight?.imperial) {
     return (
@@ -40,8 +50,8 @@ export default function DogInfo({ match }) {
               <span className="dog-breed-name">{breed.name.toUpperCase()}</span>
               <span className="dog-origin">{breed.origin}</span>
               <span className="dog-tags">Temperament:</span>
-              {breed?.temperament?.type ? (
-                <span className="dog-breed-info">{breed.temperament.type}</span>
+              {dbTemp ? (
+                stringTemp()
               ) : (
                 <span className="dog-breed-info">{breed.temperament}</span>
               )}

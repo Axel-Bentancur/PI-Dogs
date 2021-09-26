@@ -20,7 +20,7 @@ export default function DogsTable({ location }) {
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [dogsPerPage] = useState(10);
+  const [dogsPerPage] = useState(8);
 
   const paginateNumber = (number) => {
     setCurrentPage(number);

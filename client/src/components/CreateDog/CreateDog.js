@@ -20,11 +20,10 @@ export default function CreateDog() {
     maxheight: "",
     minlife: "",
     maxlife: "",
-    type: "",
+    type: [],
   });
   const dispatch = useDispatch();
-
-  const handleValidation = () => {
+  function handleValidation() {
     let formValid = true;
     if (
       dogValues.name === "" ||
@@ -43,7 +42,7 @@ export default function CreateDog() {
       cleanValues();
       setCreated(true);
     }
-  };
+  }
 
   const cleanValues = () => {
     setdogValues({});
@@ -54,12 +53,7 @@ export default function CreateDog() {
     setdogValues({ ...dogValues, [name]: value });
   };
   const onSelect = (tempArr) => {
-    let str = "";
-    tempArr.map(function (item) {
-      return (str += ` ${item.type},`);
-    });
-    let tempString = str.trim().slice(0, -1);
-    setdogValues({ ...dogValues, type: tempString });
+    setdogValues({ ...dogValues, type: tempArr });
   };
 
   const handleSubmit = (e) => {

@@ -6,7 +6,8 @@ export default function SearchForm({ temperamentList }) {
   const [values, setValues] = useState({
     breed: "",
     temperament: "",
-    weight: "",
+    minweight: "",
+    maxweight: "",
     order: "",
   });
 
@@ -19,7 +20,8 @@ export default function SearchForm({ temperamentList }) {
     setValues({
       breed: "",
       temperament: "",
-      weight: "",
+      minweight: "",
+      maxweight: "",
       order: "",
     });
   };
@@ -47,7 +49,7 @@ export default function SearchForm({ temperamentList }) {
             />
           </div>
           <div className="options-container">
-            <label htmlFor="temperament" className="label">
+            <label className="label">
               <span>- TEMPERAMENT</span>
             </label>
             <select onChange={onHandleChange} name="temperament">
@@ -60,6 +62,35 @@ export default function SearchForm({ temperamentList }) {
                   ))
                 : null}
             </select>
+          </div>
+          <div className="options-container">
+            <label className="label">
+              <span>- WEIGHT*</span>
+            </label>
+            <div className="create-options-container">
+              <label className="create-options">
+                <span>Min</span>
+              </label>
+              <input
+                type="number"
+                name="minweight"
+                min="1"
+                max="100"
+                onChange={onHandleChange}
+                value={values.minweight}
+              />
+              <label className="create-options">
+                <span>Max</span>
+              </label>
+              <input
+                type="number"
+                name="maxweight"
+                min="1"
+                max="100"
+                onChange={onHandleChange}
+                value={values.maxweight}
+              />
+            </div>
           </div>
           <div className="options-container">
             <label className="label">
@@ -95,7 +126,7 @@ export default function SearchForm({ temperamentList }) {
           <div className="options-container">
             <div className="buttons">
               <Link
-                to={`?name=${values.breed}&temperament=${values.temperament}&weight=${values.weight}&or=${values.order}`}
+                to={`?name=${values.breed}&temperament=${values.temperament}&weight=${values.minweight} - ${values.maxweight}&or=${values.order}`}
               >
                 <div className="button-inp">
                   <span>SEARCH</span>

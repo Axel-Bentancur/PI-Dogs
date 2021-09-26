@@ -19,9 +19,19 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
+const {
+  getBreedsApi,
+  getTemperamentList,
+  createArrOfObj,
+  bulkAllTemperament,
+} = require("../api/src/helpers/Helpers");
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(async () => {
+  const list = await getBreedsApi();
+  const Data = await getTemperamentList(list);
+  const final = await createArrOfObj(Data);
+  await bulkAllTemperament(final);
   server.listen(3001, () => {
     console.log("%s listening at 3001"); // eslint-disable-line no-console
   });

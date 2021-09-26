@@ -1,7 +1,6 @@
 const axios = require("axios").default;
 const { Dog, Height, Weight, Image, Temperamento } = require("../db");
 const dogsData = {};
-let id = 265;
 
 /************************************DOGS API************************************/
 
@@ -56,6 +55,7 @@ dogsData.getBreedNameFull = async (name) => {
 };
 
 dogsData.getCustomBreeds = async (query) => {
+  console.log(query);
   const NoDogs = [{ msg: "Dog not found" }];
   const list = await dogsData.getBreeds();
   const byName = await dogsData.sortingName(list, query.name);
@@ -97,7 +97,7 @@ dogsData.sortingWeight = async (arr, query) => {
   const newList = [];
   if (query) {
     arr.map((e) => {
-      if (e.weight.metric?.toLowerCase().includes(query)) {
+      if (e.weight.metric?.includes(query)) {
         newList.push(e);
       }
     });
@@ -120,7 +120,9 @@ dogsData.getTemperamentList = async (breedList) => {
   let tempArrRaw = [];
   breedList.map((e) => {
     //make an arr of string of many temperaments
-    tempArrRaw.push(e.temperament);
+    if (e.temperament) {
+      tempArrRaw.push(e.temperament);
+    }
   });
   //return tempArrRaw;
   const tempString = tempArrRaw.reduce(function (pV, cV) {
@@ -156,25 +158,24 @@ dogsData.createArrOfObj = async (list) => {
 dogsData.getBreedNameDB = async (breed) => {
   const data = await Dog.findOne({
     where: { name: breed },
-    include: [Height, Weight, Image],
+    include: [Height, Weight, Image, Temperamento],
   });
   return data;
 };
 
-dogsData.newBreed = async (name, type, minlife, maxlife, origin, url) => {
+dogsData.newBreed = async (name, minlife, maxlife, origin, url) => {
   let life_span = `${minlife} - ${maxlife} years`;
   const Data = await Dog.create({
     name,
     life_span,
     origin,
     reference_image_id: url,
-    temperament: type,
   });
   return Data.id;
 };
 
 dogsData.newHeight = async (minheight, maxheight) => {
-  let height = `${minheight} - ${maxheight} Kg`;
+  let height = `${minheight} - ${maxheight}`;
   const Data = await Height.create({
     metric: height,
   });
@@ -198,10 +199,16 @@ dogsData.newImg = async (url) => {
 };
 
 dogsData.newTemperament = async (type) => {
-  const Data = await Temperamento.create({
-    type,
-  });
-  return Data;
+  /*type.forEach(async (e) => {
+    const res = await Temperamento.findOne({
+      where: { type: e.type },
+    });
+    console.log(res);
+  }); */
+  /* const Data = await Temperamento.create({
+    //type, HERE
+  }); */
+  //return tempArr;
 };
 
 dogsData.bulkAllTemperament = async (list) => {
@@ -209,8 +216,17 @@ dogsData.bulkAllTemperament = async (list) => {
   return Data;
 };
 
-dogsData.addData = async (NewBreed, NewHeight, NewWeight, NewImg) => {
+dogsData.addData = async (NewBreed, NewHeight, NewWeight, NewImg, type) => {
+  //console.log(type);
   const res = await Dog.findByPk(NewBreed);
+  type.forEach(async (e) => {
+    //console.log(e.type);
+    const foo = await Temperamento.findOne({
+      where: { type: e.type },
+    });
+    //console.log(foo, "here");
+    await foo.addDog(NewBreed);
+  });
   await NewHeight.setDog(res);
   await NewWeight.setDog(res);
   await NewImg.setDog(res);
@@ -238,16 +254,16 @@ dogsData.newDog = async (postData) => {
     url ||
       "https://img.freepik.com/vector-gratis/plantilla-web-error-404-lindo-perrito_23-2147763344.jpg?size=338&ext=jpg"
   );
-  const NewBreed = await dogsData.newBreed(
-    name,
-    type,
-    minlife,
-    maxlife,
-    origin,
-    url
+  const NewBreed = await dogsData.newBreed(name, minlife, maxlife, origin, url);
+  const Data = await dogsData.addData(
+    NewBreed,
+    NewHeight,
+    NewWeight,
+    NewImg,
+    type
   );
-  const Data = await dogsData.addData(NewBreed, NewHeight, NewWeight, NewImg);
   return Data;
+  //console.log(Data);
 };
 module.exports = dogsData;
 
