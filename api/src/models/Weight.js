@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
   sequelize.define(
     "weight",
     {
-      metric: {
+      imperial: {
         type: DataTypes.STRING,
         allowNull: false,
       },

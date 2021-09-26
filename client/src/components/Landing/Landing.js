@@ -6,7 +6,7 @@ import Bark from "./barking.mp3";
 import "./Landing.css";
 
 export default function Landing() {
-  //let audio = new Audio(Bark);
+  let audio = new Audio(Bark);
 
   return (
     <>
@@ -27,7 +27,7 @@ export default function Landing() {
             A web page with info about all dog breeds and more{" "}
           </span>
           <Link to="/dogs">
-            <div className="button-landing">
+            <div className="button-landing" onClick={() => audio.play()}>
               <span>ENTER</span>
             </div>
           </Link>
@@ -36,5 +36,3 @@ export default function Landing() {
     </>
   );
 }
-
-/* onClick={() => audio.play()} */

@@ -16,23 +16,35 @@ export default function DogInfo({ match }) {
     dispatch(getBreed(match.params.BreedId));
   }, [dispatch, match.params.BreedId]);
 
-  if (breed?.weight && breed?.height) {
+  if (breed?.weight?.imperial) {
     return (
       <div className="main">
         <div className="container">
           <div className="container-info">
             <div className="info-imagen">
-              <img
-                className="dog-img"
-                src={breed.reference_image_id}
-                alt="breed-img"
-              />
+              {breed?.image?.reference_image_id ? (
+                <img
+                  className="dog-img"
+                  src={breed.image.reference_image_id}
+                  alt="breed-img"
+                />
+              ) : (
+                <img
+                  className="dog-img"
+                  src={breed.reference_image_id}
+                  alt="breed-img"
+                />
+              )}
             </div>
             <div className="dog-info">
               <span className="dog-breed-name">{breed.name.toUpperCase()}</span>
               <span className="dog-origin">{breed.origin}</span>
               <span className="dog-tags">Temperament:</span>
-              <span className="dog-breed-info">{breed.temperament}</span>
+              {breed?.temperament?.type ? (
+                <span className="dog-breed-info">{breed.temperament.type}</span>
+              ) : (
+                <span className="dog-breed-info">{breed.temperament}</span>
+              )}
               <span className="dog-tags">Weight:</span>
               <span className="dog-breed-info">{`${breed.weight.imperial} Kg`}</span>
               <span className="dog-tags">Height:</span>
@@ -42,8 +54,8 @@ export default function DogInfo({ match }) {
             </div>
           </div>
           <Link to="/dogs">
-            <div class="button-info">
-              <span class="button-more info">{`<< BACK`}</span>
+            <div className="button-info">
+              <span className="button-more info">{`<< BACK`}</span>
             </div>
           </Link>
         </div>

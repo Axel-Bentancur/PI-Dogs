@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Multiselect } from "multiselect-react-dropdown";
 import "./SearchForm.css";
 
 export default function SearchForm({ temperamentList }) {
   const [values, setValues] = useState({
     breed: "",
-    temperament: [],
+    temperament: "",
     weight: "",
     order: "",
   });
@@ -14,7 +13,6 @@ export default function SearchForm({ temperamentList }) {
   const onHandleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value.toLowerCase() });
-    console.log(name, value);
   };
 
   const cleanValues = () => {
@@ -26,9 +24,11 @@ export default function SearchForm({ temperamentList }) {
     });
   };
 
-  const onSelect = (tempArr) => {
-    setValues({ ...values, temperament: tempArr });
-  };
+  /*   const handleKeyUp = (e) => {
+    if (e.keyCode === 13) {
+      console.log("hola");
+    }
+  }; */
 
   return (
     <div className="search-form">
@@ -50,11 +50,16 @@ export default function SearchForm({ temperamentList }) {
             <label htmlFor="temperament" className="label">
               <span>- TEMPERAMENT</span>
             </label>
-            <Multiselect
-              options={temperamentList}
-              displayValue="type"
-              onSelect={onSelect}
-            />
+            <select onChange={onHandleChange} name="temperament">
+              <option value="">Choose</option>
+              {temperamentList
+                ? temperamentList.map((e) => (
+                    <option value={e.type} key={e.id}>
+                      {e.type}
+                    </option>
+                  ))
+                : null}
+            </select>
           </div>
           <div className="options-container">
             <label className="label">
@@ -108,5 +113,3 @@ export default function SearchForm({ temperamentList }) {
     </div>
   );
 }
-
-/*  */

@@ -27,7 +27,7 @@ dogsCtrl.getBreedName = async (req, res) => {
 
 dogsCtrl.createBreed = async (req, res) => {
   const newData = await newDog(req.body);
-  res.status(201).json(newData);
+  res.status(201);
 };
 
 dogsCtrl.bulkTemperament = async (_req, res) => {

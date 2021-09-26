@@ -8,23 +8,13 @@ module.exports = (sequelize) => {
     "dog",
     {
       id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        unique: true,
-        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull: false,
-      },
-      bred_for: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      breed_group: {
-        type: DataTypes.STRING,
         allowNull: false,
       },
       life_span: {
@@ -34,6 +24,9 @@ module.exports = (sequelize) => {
       origin: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      temperament: {
+        type: DataTypes.STRING,
       },
       reference_image_id: {
         type: DataTypes.STRING,

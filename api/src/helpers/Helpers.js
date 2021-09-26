@@ -1,5 +1,5 @@
 const axios = require("axios").default;
-const { Dog, Height, Weight, Image, Temperament } = require("../db");
+const { Dog, Height, Weight, Image, Temperamento } = require("../db");
 const dogsData = {};
 let id = 265;
 
@@ -28,12 +28,12 @@ dogsData.getBreedsApi = async () => {
 };
 
 dogsData.getBreedDB = async () => {
-  const data = Dog.findAll({ include: [Height, Weight, Image, Temperament] });
+  const data = Dog.findAll({ include: [Height, Weight, Image, Temperamento] });
   return data;
 };
 
 dogsData.getTemp = async () => {
-  const data = Temperament.findAll();
+  const data = Temperamento.findAll();
   return data;
 };
 
@@ -56,7 +56,7 @@ dogsData.getBreedNameFull = async (name) => {
 };
 
 dogsData.getCustomBreeds = async (query) => {
-  const NoDogs = "Dog not found";
+  const NoDogs = [{ msg: "Dog not found" }];
   const list = await dogsData.getBreeds();
   const byName = await dogsData.sortingName(list, query.name);
   const bytemperament = await dogsData.sortingTemp(byName, query.temperament);
@@ -107,7 +107,6 @@ dogsData.sortingWeight = async (arr, query) => {
   }
 };
 dogsData.sorting = async (arr, query) => {
-  console.log(query);
   if (!query || query === "asc") {
     return arr;
   } else {
@@ -126,7 +125,7 @@ dogsData.getTemperamentList = async (breedList) => {
   //return tempArrRaw;
   const tempString = tempArrRaw.reduce(function (pV, cV) {
     //transf that arr of strings in a huge string of temperaments
-    return `${pV} ${cV}`;
+    return `${pV}, ${cV}`;
   });
   tempArrRaw = tempString.split(", "); //make that huge string of temperaments in a arr of temperament
   return dogsData.words(tempArrRaw);
@@ -157,109 +156,111 @@ dogsData.createArrOfObj = async (list) => {
 dogsData.getBreedNameDB = async (breed) => {
   const data = await Dog.findOne({
     where: { name: breed },
-    include: [Height, Weight, Image, Temperament],
+    include: [Height, Weight, Image],
   });
   return data;
 };
 
-dogsData.newBreed = async (
-  id,
-  name,
-  bred_for,
-  breed_group,
-  life_span,
-  origin,
-  url
-) => {
+dogsData.newBreed = async (name, type, minlife, maxlife, origin, url) => {
+  let life_span = `${minlife} - ${maxlife} years`;
   const Data = await Dog.create({
-    id,
     name,
-    bred_for,
-    breed_group,
     life_span,
     origin,
     reference_image_id: url,
+    temperament: type,
   });
-  id++;
   return Data.id;
 };
 
-dogsData.newHeight = async (height) => {
+dogsData.newHeight = async (minheight, maxheight) => {
+  let height = `${minheight} - ${maxheight} Kg`;
   const Data = await Height.create({
     metric: height,
   });
   return Data;
 };
 
-dogsData.newWeight = async (weight) => {
+dogsData.newWeight = async (minweight, maxweight) => {
+  let weight = `${minweight} - ${maxweight}`;
   const Data = await Weight.create({
-    metric: weight,
+    imperial: weight,
   });
   return Data;
 };
 
 dogsData.newImg = async (url) => {
   const Data = await Image.create({
-    id: url,
     url,
     reference_image_id: url,
   });
   return Data;
 };
 
-dogsData.newTemperament = async () => {
-  console.log("asd");
-};
-
-dogsData.bulkAllTemperament = async (list) => {
-  const Data = await Temperament.bulkCreate(list);
+dogsData.newTemperament = async (type) => {
+  const Data = await Temperamento.create({
+    type,
+  });
   return Data;
 };
 
-dogsData.addData = async (NewBreed, NewHeight, NewWeight, NewImg, NewTemp) => {
+dogsData.bulkAllTemperament = async (list) => {
+  const Data = await Temperamento.bulkCreate(list);
+  return Data;
+};
+
+dogsData.addData = async (NewBreed, NewHeight, NewWeight, NewImg) => {
   const res = await Dog.findByPk(NewBreed);
   await NewHeight.setDog(res);
   await NewWeight.setDog(res);
   await NewImg.setDog(res);
-  await NewTemp.addDog(res);
   return res;
 };
 
 dogsData.newDog = async (postData) => {
   const {
     name,
-    bred_for,
-    breed_group,
-    life_span,
     origin,
-    height,
-    weight,
+    minlife,
+    maxlife,
+    minheight,
+    maxheight,
+    minweight,
+    maxweight,
     url,
     type,
   } = postData.breedInfo;
-  const NewHeight = await dogsData.newHeight(height);
-  const NewWeight = await dogsData.newWeight(weight);
+  const NewHeight = await dogsData.newHeight(minheight, maxheight);
+
+  const NewWeight = await dogsData.newWeight(minweight, maxweight);
+
   const NewImg = await dogsData.newImg(
     url ||
       "https://img.freepik.com/vector-gratis/plantilla-web-error-404-lindo-perrito_23-2147763344.jpg?size=338&ext=jpg"
   );
-  const NewTemp = await dogsData.newTemperament(type);
   const NewBreed = await dogsData.newBreed(
-    id,
     name,
-    bred_for,
-    breed_group,
-    life_span,
+    type,
+    minlife,
+    maxlife,
     origin,
     url
   );
-  const Data = await dogsData.addData(
-    NewBreed,
-    NewHeight,
-    NewWeight,
-    NewImg,
-    NewTemp
-  );
+  const Data = await dogsData.addData(NewBreed, NewHeight, NewWeight, NewImg);
   return Data;
 };
 module.exports = dogsData;
+
+/* dogsData.sorteo = (arr) => {
+  function compare(a, b) {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  }
+  const res = arr.sort(compare);
+  return res;
+}; */

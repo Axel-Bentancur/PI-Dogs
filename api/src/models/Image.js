@@ -5,11 +5,10 @@ module.exports = (sequelize) => {
   sequelize.define(
     "image",
     {
-      id: {
-        type: DataTypes.STRING,
-        primaryKey: true,
-      },
       url: {
+        type: DataTypes.STRING,
+      },
+      reference_image_id: {
         type: DataTypes.STRING,
       },
     },

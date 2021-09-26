@@ -23,7 +23,7 @@ function dogReducer(state = initialState, { type, payload }) {
     case CLEAN_BREED:
       return { ...state, breed: payload };
     case CREATE_BREED:
-      return { ...state, breedList: payload };
+      return { ...state };
     default:
       return state;
   }

@@ -1,0 +1,65 @@
+.card {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem;
+  border-bottom: 1px solid #d1d1d1;
+}
+.no-dog {
+  justify-content: center;
+}
+.info-no-dog {
+  display: flex;
+  align-items: center;
+  height: 80px;
+}
+.no-dog-msg {
+  font-size: 24px;
+  font-family: "Podkova", serif;
+  color: #909090;
+  font-weight: 700;
+}
+.img-container {
+  padding: 20px;
+  padding-left: 0;
+}
+.dog-img img {
+  width: 200px;
+  background-size: contain;
+  border-radius: 8px;
+}
+
+.info-dog span {
+  display: block;
+  font-family: "Podkova", serif;
+  font-weight: 600;
+}
+.origin {
+  font-size: 12px;
+  color: #909090;
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+.breed-name {
+  color: #7831a3;
+  font-size: 28px;
+}
+.info {
+  font-size: 15px;
+  color: #404040;
+  margin-bottom: 3px;
+}
+.button-info {
+  display: inline-block;
+  background: #7831a3;
+  padding: 8px;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+.button-more {
+  color: #fff;
+  margin-bottom: 0;
+}
+.button-info:hover {
+  cursor: pointer;
+  background-color: #602883;
+}

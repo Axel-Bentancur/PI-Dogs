@@ -24,7 +24,7 @@ export const getBreed = (breedName) => {
 export const createBreed = (breedInfo) => {
   return (dispatch, getState) => {
     axios.post(`http://localhost:3001/dog`, { breedInfo }).then((response) => {
-      dispatch({ type: CREATE_BREED, payload: response.data });
+      dispatch({ type: CREATE_BREED });
     });
   };
 };

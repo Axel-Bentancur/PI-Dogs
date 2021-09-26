@@ -1,8 +1,11 @@
-.asd {
+.create-container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 2rem 0;
+  padding: 2rem 0;
+  z-index: 0;
+  overflow: hidden;
 }
 .create-form {
   width: 300px;
@@ -20,4 +23,48 @@
 }
 input {
   border-radius: 5px;
+}
+.create-input {
+  height: 30px;
+}
+.error-msg {
+  text-align: center;
+  color: #d88888;
+}
+.created-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  width: 50%;
+  background: #7831a3;
+  border-radius: 8px;
+  align-items: center;
+}
+.create-info {
+  color: #fff;
+  font-size: 25px;
+}
+.button-create {
+  display: inline-block;
+  background: #fff;
+  padding: 8px;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+.button-create span {
+  font-weight: 600;
+}
+.create-circle {
+  position: absolute;
+  z-index: -1;
+}
+.c1 {
+  width: 650px;
+  top: -210px;
+  right: -125px;
+}
+.c2 {
+  width: 1000px;
+  bottom: -400px;
+  left: -285px;
 }
