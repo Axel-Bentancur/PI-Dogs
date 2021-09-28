@@ -63,3 +63,12 @@
   cursor: pointer;
   background-color: #602883;
 }
+
+@media only screen and (max-width: 900px) {
+  .card {
+    flex-direction: column;
+  }
+  .img-container {
+    padding-left: 20px;
+  }
+}

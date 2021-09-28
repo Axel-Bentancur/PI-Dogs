@@ -5,6 +5,17 @@
 }
 .table-container {
   background: #fff;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
   border-radius: 8px;
+}
+@media only screen and (max-width: 900px) {
+  .dog-table {
+    padding: 2rem 0rem;
+  }
+  .table-container {
+    padding: 1rem 0rem;
+  }
+  .info-dog {
+    text-align: center;
+  }
 }

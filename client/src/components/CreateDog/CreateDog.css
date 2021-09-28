@@ -8,7 +8,8 @@
   overflow: hidden;
 }
 .create-form {
-  width: 300px;
+  max-width: 300px;
+  width: 90%;
 }
 .create-options-container {
   display: flex;
@@ -67,4 +68,15 @@ input {
   width: 1000px;
   bottom: -400px;
   left: -285px;
+}
+
+@media only screen and (max-width: 900px) {
+  .created-container {
+    width: 90%;
+    text-align: center;
+    padding: 1rem;
+  }
+  .create-info {
+    margin-bottom: 1rem;
+  }
 }

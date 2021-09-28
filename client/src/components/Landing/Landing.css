@@ -69,6 +69,7 @@
 }
 .block {
   display: inline-block;
+  color: #fff;
 }
 
 @media only screen and (max-width: 900px) {
