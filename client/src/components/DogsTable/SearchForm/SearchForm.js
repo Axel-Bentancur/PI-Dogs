@@ -31,7 +31,6 @@ export default function SearchForm({ temperamentList }) {
       console.log("hola");
     }
   }; */
-
   return (
     <div className="search-form">
       <form className="form">
@@ -85,7 +84,7 @@ export default function SearchForm({ temperamentList }) {
               <input
                 type="number"
                 name="maxweight"
-                min="1"
+                min="01"
                 max="100"
                 onChange={onHandleChange}
                 value={values.maxweight}
@@ -126,7 +125,7 @@ export default function SearchForm({ temperamentList }) {
           <div className="options-container">
             <div className="buttons">
               <Link
-                to={`?name=${values.breed}&temperament=${values.temperament}&weight=${values.minweight} - ${values.maxweight}&or=${values.order}`}
+                to={`?name=${values.breed}&temperament=${values.temperament}&minweight=${values.minweight}&maxweight=${values.maxweight}&or=${values.order}`}
               >
                 <div className="button-inp">
                   <span>SEARCH</span>
@@ -144,3 +143,12 @@ export default function SearchForm({ temperamentList }) {
     </div>
   );
 }
+
+/*   const onhandleNumber = (e) => {
+    const { name, value } = e.target;
+    if (value < 10) {
+      setValues({ ...values, [name]: 0 + value });
+    } else {
+      setValues({ ...values, [name]: value });
+    }
+  }; */

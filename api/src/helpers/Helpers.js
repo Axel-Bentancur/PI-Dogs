@@ -55,12 +55,15 @@ dogsData.getBreedNameFull = async (name) => {
 };
 
 dogsData.getCustomBreeds = async (query) => {
-  console.log(query);
   const NoDogs = [{ msg: "Dog not found" }];
   const list = await dogsData.getBreeds();
   const byName = await dogsData.sortingName(list, query.name);
   const bytemperament = await dogsData.sortingTemp(byName, query.temperament);
-  const byWeight = await dogsData.sortingWeight(bytemperament, query.weight);
+  const byWeight = await dogsData.sortingWeight(
+    bytemperament,
+    query.minweight,
+    query.maxweight
+  );
   const bySort = await dogsData.sorting(byWeight, query.or);
   return bySort.length > 0 ? bySort : NoDogs; //probably change
 };
@@ -86,6 +89,12 @@ dogsData.sortingTemp = async (arr, query) => {
     arr.map((e) => {
       if (e.temperament?.toLowerCase().includes(query)) {
         newList.push(e);
+      } else if (e.temperamentos) {
+        e.temperamentos.map((element) => {
+          if (element.type.toLowerCase().includes(query)) {
+            newList.push(e);
+          }
+        });
       }
     });
     return newList;
@@ -93,11 +102,11 @@ dogsData.sortingTemp = async (arr, query) => {
     return arr;
   }
 };
-dogsData.sortingWeight = async (arr, query) => {
+dogsData.sortingWeight = async (arr, min, max) => {
   const newList = [];
-  if (query) {
+  if (min && max) {
     arr.map((e) => {
-      if (e.weight.metric?.includes(query)) {
+      if (e.weight.imperial?.includes(`${min} - ${max}`)) {
         newList.push(e);
       }
     });
@@ -196,19 +205,6 @@ dogsData.newImg = async (url) => {
     reference_image_id: url,
   });
   return Data;
-};
-
-dogsData.newTemperament = async (type) => {
-  /*type.forEach(async (e) => {
-    const res = await Temperamento.findOne({
-      where: { type: e.type },
-    });
-    console.log(res);
-  }); */
-  /* const Data = await Temperamento.create({
-    //type, HERE
-  }); */
-  //return tempArr;
 };
 
 dogsData.bulkAllTemperament = async (list) => {

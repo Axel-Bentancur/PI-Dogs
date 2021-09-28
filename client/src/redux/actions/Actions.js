@@ -4,6 +4,7 @@ export const GET_BREED = "GET_BREED";
 export const GET_TEMPERAMENT = "GET_TEMPERAMENT";
 export const CREATE_BREED = "CREATE_BREED";
 export const CLEAN_BREED = "CLEAN_BREED";
+export const EXIST_NAME = "EXIST_NAME";
 
 export const getBreeds = (params) => {
   return (dispatch, getState) => {

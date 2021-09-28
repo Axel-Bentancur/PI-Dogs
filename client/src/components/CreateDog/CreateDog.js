@@ -14,6 +14,7 @@ export default function CreateDog() {
   const [created, setCreated] = useState(false);
   const [dogValues, setdogValues] = useState({
     name: "",
+    origin: "",
     minweight: "",
     maxweight: "",
     minheight: "",
@@ -27,6 +28,7 @@ export default function CreateDog() {
     let formValid = true;
     if (
       dogValues.name === "" ||
+      dogValues.origin === "" ||
       dogValues.minweight === "" ||
       dogValues.maxweight === "" ||
       dogValues.minheight === "" ||
@@ -52,6 +54,7 @@ export default function CreateDog() {
     const { name, value } = e.target;
     setdogValues({ ...dogValues, [name]: value });
   };
+
   const onSelect = (tempArr) => {
     setdogValues({ ...dogValues, type: tempArr });
   };
@@ -250,3 +253,12 @@ export default function CreateDog() {
     );
   }
 }
+
+/*   const onhandleNumber = (e) => {
+    const { name, value } = e.target;
+    if (value < 10) {
+      setdogValues({ ...dogValues, [name]: 0 + value });
+    } else {
+      setdogValues({ ...dogValues, [name]: value });
+    }
+  }; */

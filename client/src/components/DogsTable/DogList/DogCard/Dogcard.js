@@ -36,7 +36,7 @@ export default function DogCard({ dog }) {
           ) : (
             <span className="info">{`Temperament: ${dog.temperament}`}</span>
           )}
-          <span className="info">{`Weight: ${dog.weight.metric} kg`}</span>
+          <span className="info">{`Weight: ${dog.weight.imperial} kg`}</span>
           <Link to={`/dogs/breed/${dog.name}`}>
             <div className="button-info">
               <span className="button-more info">+ MORE</span>
