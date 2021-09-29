@@ -39,7 +39,10 @@ export default function DogsTable({ location }) {
 
   return (
     <div className="main main-container">
-      <SearchForm temperamentList={temperamentList} />
+      <SearchForm
+        temperamentList={temperamentList}
+        paginateNumber={paginateNumber}
+      />
       <DogList
         currentDogs={currentDogs}
         totalDogs={totalDogs}

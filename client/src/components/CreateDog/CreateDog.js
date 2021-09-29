@@ -25,7 +25,6 @@ export default function CreateDog() {
   });
   const dispatch = useDispatch();
   function handleValidation() {
-    let formValid = true;
     if (
       dogValues.name === "" ||
       dogValues.origin === "" ||
@@ -37,7 +36,6 @@ export default function CreateDog() {
       dogValues.maxlife === "" ||
       dogValues.type === ""
     ) {
-      formValid = false;
       setError("all fields with (*) are required");
     } else {
       dispatch(createBreed(dogValues));

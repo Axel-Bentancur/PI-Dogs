@@ -14,9 +14,9 @@ dogsData.getBreeds = async () => {
   db.map((e) => {
     breedArr.push(e);
   });
-  const res = breedArr.sort((a, b) => {
-    return a.name - b.name;
-  });
+  const res = breedArr.sort((a, b) =>
+    a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+  );
   return res;
 };
 
@@ -119,7 +119,7 @@ dogsData.sorting = async (arr, query) => {
   if (!query || query === "asc") {
     return arr;
   } else {
-    return arr.sort().reverse();
+    return arr.sort((a, b) => (a.name < b.name ? 1 : b.name < a.name ? -1 : 0));
   }
 };
 
@@ -173,14 +173,21 @@ dogsData.getBreedNameDB = async (breed) => {
 };
 
 dogsData.newBreed = async (name, minlife, maxlife, origin, url) => {
+  const Name = await dogsData.capitalize(name);
+
   let life_span = `${minlife} - ${maxlife} years`;
+
   const Data = await Dog.create({
-    name,
+    name: Name,
     life_span,
     origin,
     reference_image_id: url,
   });
   return Data.id;
+};
+
+dogsData.capitalize = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
 dogsData.newHeight = async (minheight, maxheight) => {
@@ -213,14 +220,11 @@ dogsData.bulkAllTemperament = async (list) => {
 };
 
 dogsData.addData = async (NewBreed, NewHeight, NewWeight, NewImg, type) => {
-  //console.log(type);
   const res = await Dog.findByPk(NewBreed);
   type.forEach(async (e) => {
-    //console.log(e.type);
     const foo = await Temperamento.findOne({
       where: { type: e.type },
     });
-    //console.log(foo, "here");
     await foo.addDog(NewBreed);
   });
   await NewHeight.setDog(res);
@@ -259,20 +263,5 @@ dogsData.newDog = async (postData) => {
     type
   );
   return Data;
-  //console.log(Data);
 };
 module.exports = dogsData;
-
-/* dogsData.sorteo = (arr) => {
-  function compare(a, b) {
-    if (a.name < b.name) {
-      return -1;
-    }
-    if (a.name > b.name) {
-      return 1;
-    }
-    return 0;
-  }
-  const res = arr.sort(compare);
-  return res;
-}; */

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./SearchForm.css";
 
-export default function SearchForm({ temperamentList }) {
+export default function SearchForm({ temperamentList, paginateNumber }) {
   const [values, setValues] = useState({
     breed: "",
     temperament: "",
@@ -24,13 +24,8 @@ export default function SearchForm({ temperamentList }) {
       maxweight: "",
       order: "",
     });
+    paginateNumber(1);
   };
-
-  /*   const handleKeyUp = (e) => {
-    if (e.keyCode === 13) {
-      console.log("hola");
-    }
-  }; */
   return (
     <div className="search-form">
       <form className="form">
@@ -143,12 +138,3 @@ export default function SearchForm({ temperamentList }) {
     </div>
   );
 }
-
-/*   const onhandleNumber = (e) => {
-    const { name, value } = e.target;
-    if (value < 10) {
-      setValues({ ...values, [name]: 0 + value });
-    } else {
-      setValues({ ...values, [name]: value });
-    }
-  }; */
